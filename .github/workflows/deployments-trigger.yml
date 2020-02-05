@@ -4,6 +4,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: github.event.sender == 'tell-y'
     steps:
     - name: check if ==
       if: github.event.deployment == 'deployment'
@@ -11,4 +12,8 @@ jobs:
     - name: check if !=
       if: github.event.deployment != 'deployment'
       run: echo 'Always false'
-    - run: echo '${{ github.event.deployment.description }}'
+    - run: echo ${{ github.event.deployment.ref }}
+    - run: echo ${{ github.event.deployment.description }}
+    - run: echo ${{ github.event.deployment.task }}
+    - run: echo ${{ github.event.deployment.payload }}
+    - run: echo ${{ github.event.deployment.environment }}
