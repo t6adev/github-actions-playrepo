@@ -1,0 +1,8 @@
+name: Deployments trigger
+on:
+  deployment
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo 'triggered'
