@@ -5,6 +5,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - if: github.event.deployment == 'deployment'
+    - name: check if ==
+      if: github.event.deployment == 'deployment'
       run: echo 'Always true'
-    - run: echo ${{ github.event.deployment.description }}
+    - name: check if !=
+      if: github.event.deployment != 'deployment'
+      run: echo 'Always false'
+    - run: echo '${{ github.event.deployment.description }}'
