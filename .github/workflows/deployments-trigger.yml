@@ -5,4 +5,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{ toJSON(github.event) }}
+    - if: github.event.deployment == 'deployment'
+      run: echo 'Always true'
+    - run: echo ${{ github.event.deployment.description }}
