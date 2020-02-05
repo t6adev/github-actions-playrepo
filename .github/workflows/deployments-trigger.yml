@@ -4,7 +4,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event.sender == 'tell-y'
+    if: github.event.sender.login == 'tell-y'
     steps:
     - name: check if ==
       if: github.event.deployment == 'deployment'
