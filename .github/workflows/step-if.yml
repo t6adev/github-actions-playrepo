@@ -15,5 +15,5 @@ jobs:
     - name: at if()
       if: ${{ failure() }}
       env:
-          STEP_CONTAIN: ${{ contains(steps, 'id_is_hello') }}
+          STEP_CONTAIN: ${{ contains(toJson(steps), 'id_is_hello') }}
       run: echo "$STEP_CONTAIN"
