@@ -7,8 +7,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - run: echo 'hello'
-    - run: echo 'exit' && exit 1
+    - run: echo 'hello 1st'
+    - run: echo 'exit 1st' && exit 1
+    - run: echo 'hello 2nd'
+    - run: echo 'exit 2nd' && exit 1
     - name: at if()
       if: ${{ failure() }}
       run: echo 'run this'
