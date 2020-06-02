@@ -1,0 +1,13 @@
+name: Play step-if
+on:
+  push:
+    branches:
+      - test
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo 'hello'
+    - name: at if()
+      if: ${{ failure() }}
+      run: echo 'not run this'
