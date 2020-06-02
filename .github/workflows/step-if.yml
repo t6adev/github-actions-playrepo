@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: echo 'hello'
+    - run: echo 'exit' && exit 1
     - name: at if()
       if: ${{ failure() }}
-      run: echo 'not run this'
+      run: echo 'run this'
