@@ -7,10 +7,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - run: echo 'hello 1st'
-    - run: echo 'exit 1st' && exit 1
+    - name: hello
+      id: id_is_hello
+      run: echo 'hello 1st' && exit 1
     - run: echo 'this is not run'
     - run: echo 'this is not run' && exit 1
     - name: at if()
-      if: ${{ failure() }}
+      if: ${{ failure() && steps.id_is_hello.name == 'id_is_hello' }}
       run: echo 'run this'
