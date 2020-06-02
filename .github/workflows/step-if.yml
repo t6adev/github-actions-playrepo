@@ -13,7 +13,5 @@ jobs:
     - run: echo 'this is not run'
     - run: echo 'this is not run' && exit 1
     - name: at if()
-      if: ${{ failure() }}
-      env:
-          STEP_CONTAIN: ${{ contains(toJson(steps), 'id_is_hello') }}
-      run: echo "$STEP_CONTAIN"
+      if: ${{ failure() && contains(toJson(steps), 'id_is_hello') }}
+      run: echo 'hi'
