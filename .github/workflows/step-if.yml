@@ -10,6 +10,9 @@ jobs:
     - name: hello
       id: id_1
       run: echo 'hello 1st' && exit 1
+    - name: save status
+      if: ${{ always() }}
+      run: echo 'hi'
     - name: debug
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
