@@ -9,7 +9,10 @@ jobs:
     steps:
     - name: hello
       id: id_1
-      run: echo 'hello 1st' && exit 1 || echo ::set-output name=status::failure
+      run: echo 'hello 1st' && exit 1
+    - name: save status
+      if: ${{ always() }}
+      run: [ $? != 0 ] && echo ::set-output name=status::failure
     - name: debug
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
