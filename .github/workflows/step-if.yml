@@ -12,6 +12,7 @@ jobs:
       run: |
         echo ::set-output name=executed::yes
         echo 'hello 1st' && exit 1
+      continue-on-error: true
     - name: debug
       if: ${{ always() }}
       env:
