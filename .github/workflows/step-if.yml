@@ -13,7 +13,7 @@ jobs:
     - name: save status
       id: id_1_status
       if: ${{ always() }}
-      run: [ $? != 0 ] && echo ::set-output name=status::failure
+      run: test $? != 0 && echo ::set-output name=status::failure
     - name: debug
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
