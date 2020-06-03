@@ -9,7 +9,9 @@ jobs:
     steps:
     - name: hello
       id: id_1
-      run: echo 'hello 1st' && exit 1
+      run: |
+        echo 'hello 1st' && exit 1
+        echo $?
     - name: save status
       id: id_1_status
       if: ${{ always() }}
