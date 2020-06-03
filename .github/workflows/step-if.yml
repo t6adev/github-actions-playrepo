@@ -15,8 +15,8 @@ jobs:
     - name: at if()
       if: ${{ failure() && contains(toJson(steps), 'id_is_hello') }}
       run: echo 'hi'
-    - run: echo 'running'
+    - run: echo 'not running'
       id: running
-    - name: at if() (not running)
+    - name: at if()
       if: ${{ failure() && contains(toJson(steps), 'running') }}
-      run: echo 'this is not run'
+      run: echo 'this is run'
