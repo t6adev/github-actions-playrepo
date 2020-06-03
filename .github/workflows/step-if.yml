@@ -19,7 +19,7 @@ jobs:
       run: echo 'this is not run' || echo ::set-output name=status::failure
     - name: at if() !success() && !cancelled()
       id: id_4
-      if: !success() && !cancelled()
+      if: ${{ !success() && !cancelled() }}
       run: echo 'hi'
     - name: (cancelled)
       run: echo 'this is not run' && exit 1
