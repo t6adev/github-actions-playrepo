@@ -12,7 +12,7 @@ jobs:
       run: echo 'hello 1st' && exit 1 || echo ::set-output name=status::failure
     - name: hi at if !success()
       id: id_2
-      if: !success()
+      if: ${{ !success() }}
       run: echo 'hi'
     - name: (cancelled)
       id: id_3
@@ -26,16 +26,16 @@ jobs:
       id: id_5
     - name: at if() failure()
       id: id_6
-      if: failure()
+      if: ${{ failure() }}
       run: echo 'hi'
     - name: (cancelled)
       run: echo 'this is not run'
       id: id_7
     - name: at if() check id_1
       id: id_8
-      if: failure() && steps.id_1.outputs.status == 'failure'
+      if: ${{ failure() && steps.id_1.outputs.status == 'failure' }}
       run: echo 'this is run'
     - name: at if() check id_5
       id: id_8
-      if: failure() && steps.id_5.outputs.status == 'failure'
+      if: ${{ failure() && steps.id_5.outputs.status == 'failure' }}
       run: echo 'this is not run'
