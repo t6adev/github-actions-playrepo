@@ -11,8 +11,9 @@ jobs:
       id: id_1
       run: echo 'hello 1st' && exit 1
     - name: save status
+      id: id_1_status
       if: ${{ always() }}
-      run: echo 'hi'
+      run: [ $? != 0 ] && echo ::set-output name=status::failure
     - name: debug
       env:
         STEPS_CONTEXT: ${{ toJson(steps) }}
