@@ -9,16 +9,9 @@ jobs:
     steps:
     - name: hello
       id: id_1
-      continue-on-error: true
       run: |
+        echo ::set-output name=executed::yes
         echo 'hello 1st' && exit 1
-        echo $?
-    - name: save status
-      id: id_1_status
-      if: ${{ always() }}
-      run: |
-        echo $?
-        echo ::set-output name=status::failure
     - name: debug
       if: ${{ always() }}
       env:
@@ -30,13 +23,16 @@ jobs:
       run: echo 'hi'
     - name: (cancelled)
       id: id_3
-      run: echo 'this is not run' || echo ::set-output name=status::failure
+      run: echo 'this is not run'
     - name: at if() !success() && !cancelled()
       id: id_4
       if: ${{ !success() && !cancelled() }}
       run: echo 'hi'
     - name: (cancelled)
-      run: echo 'this is not run' && exit 1
+      run: |
+        echo ::set-output name=executed::yes
+        echo 'this is not run'
+        exit 1
       id: id_5
     - name: at if() failure()
       id: id_6
@@ -47,9 +43,9 @@ jobs:
       id: id_7
     - name: at if() check id_1
       id: id_8
-      if: ${{ failure() && steps.id_1.outputs.status == 'failure' }}
+      if: ${{ failure() && steps.id_1.outputs.executed == 'yes' }}
       run: echo 'this is run'
     - name: at if() check id_5
       id: id_9
-      if: ${{ failure() && steps.id_5.outputs.status == 'failure' }}
+      if: ${{ failure() && steps.id_5.outputs.executed == 'yes' }}
       run: echo 'this is not run'
