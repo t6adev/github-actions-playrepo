@@ -10,13 +10,18 @@ jobs:
     - name: hello
       id: id_is_hello
       run: echo 'hello 1st' && exit 1
+    - name: at if()
+      if: ${{ !success() }}
+      run: echo 'hi'
     - run: echo 'this is not run'
+    - name: at if()
+      if: ${{ !success() }}
+      run: echo 'this is not run'
     - run: echo 'this is not run' && exit 1
     - name: at if()
-      if: ${{ failure() && contains(toJson(steps), 'id_is_hello') }}
+      if: ${{ failure() }}
       run: echo 'hi'
     - run: echo 'not running'
-      id: running
     - name: at if()
-      if: ${{ failure() && contains(toJson(steps), 'running') }}
+      if: ${{ failure() }}
       run: echo 'this is run'
