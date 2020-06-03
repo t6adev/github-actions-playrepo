@@ -16,7 +16,7 @@ jobs:
     - run: echo 'this is not run'
     - name: at if()
       if: ${{ !success() && !cancelled() }}
-      run: echo 'this is not run'
+      run: echo 'this is run'
     - run: echo 'this is not run' && exit 1
     - name: at if()
       if: ${{ failure() }}
